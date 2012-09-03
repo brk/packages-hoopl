@@ -171,7 +171,8 @@ type family   Fact x f :: *
 type instance Fact C f = FactBase f
 type instance Fact O f = f
 
--- | if the graph being analyzed is open at the entry, there must
+-- | Disconnected subgraphs introduced by rewrites will be discarded.
+--   if the graph being analyzed is open at the entry, there must
 --   be no other entry point, or all goes horribly wrong...
 analyzeAndRewriteFwd
    :: forall m n f e x entries. (CheckpointMonad m, NonLocal n, LabelsPtr entries)
@@ -510,7 +511,8 @@ effects.)
 -}
 
 
--- | if the graph being analyzed is open at the exit, I don't
+-- | Disconnected subgraphs introduced by rewrites will be discarded.
+--   if the graph being analyzed is open at the exit, I don't
 --   quite understand the implications of possible other exits
 analyzeAndRewriteBwd
    :: (CheckpointMonad m, NonLocal n, LabelsPtr entries)

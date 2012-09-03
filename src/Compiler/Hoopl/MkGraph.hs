@@ -157,6 +157,8 @@ liftA2 f (A g) (A g') = A (liftM2 f g g')
 
 -- | Extend an existing 'AGraph' with extra basic blocks "out of line".
 -- No control flow is implied.  Simon PJ should give example use case.
+-- Note that, when used during rewriting, unreachable blocks will be
+-- immediately and silently discarded!
 addBlocks      :: HooplNode n
                => AGraph n e x -> AGraph n C C -> AGraph n e x
 addBlocks (A g) (A blocks) = A $ g >>= \g -> blocks >>= add g
